@@ -263,15 +263,15 @@ class Planner:
     def _required_completion_value(self, i: int, night_index: int, damp: float) -> float:
         """Value of crossing the required threshold on this target.
 
-        Normal planning discounts repeatedly missed fields.  In the final two nights
-        in which the target can be observed, restore the terminal penalty so there is
-        still one recovery opportunity after a bad exposure or closure.
+        Normal planning discounts repeatedly missed fields.  On the last night in
+        which the target can be observed, restore the terminal penalty so a stale
+        miss counter cannot silently abandon it.
         """
         state = self.state
         if not state.required[i] or state.factor[i] >= state.scoring.required_threshold:
             return 0.0
         value = max(REQUIRED_BONUS, state.scoring.required_penalty)
-        return value if state.last_night[i] <= night_index + 1 else value * damp
+        return value if state.last_night[i] <= night_index else value * damp
 
     def _pace(self, payload: dict, now) -> None:
         """Do less work per decision when the wall clock is short for the nights still to come."""

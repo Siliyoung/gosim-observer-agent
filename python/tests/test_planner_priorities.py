@@ -5,7 +5,7 @@ from agent_core.planner import Planner
 
 
 class PlannerPriorityTests(unittest.TestCase):
-    def test_required_penalty_is_restored_in_final_two_visible_nights(self):
+    def test_required_penalty_is_restored_on_last_visible_night(self):
         planner = Planner.__new__(Planner)
         planner.request_goals = {}
         planner.state = SimpleNamespace(
@@ -15,8 +15,7 @@ class PlannerPriorityTests(unittest.TestCase):
             scoring=SimpleNamespace(required_threshold=0.5, required_penalty=50.0),
         )
 
-        self.assertEqual(planner._required_completion_value(0, 2, 0.1), 6.0)
-        self.assertEqual(planner._required_completion_value(0, 3, 0.1), 60.0)
+        self.assertEqual(planner._required_completion_value(0, 3, 0.1), 6.0)
         self.assertEqual(planner._required_completion_value(0, 4, 0.1), 60.0)
 
     def test_fast_mode_fibers_follow_layout_size(self):
