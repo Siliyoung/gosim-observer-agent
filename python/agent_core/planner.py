@@ -63,6 +63,9 @@ MAX_REPORTS = 2
 # This is a planning regulariser rather than simulator overhead: without it, tiny
 # score-rate differences lead to too many short exposures and poor survey coverage.
 FIELD_CHANGE_COST_SECONDS = 300.0
+# Do not perturb the long-horizon schedule for a numerically tiny one-step gain.
+# A refinement must clear this relative-value margin over the coarse field.
+REFINEMENT_MIN_RELATIVE_GAIN = 0.005
 
 
 class RequestGoal(NamedTuple):
@@ -568,7 +571,7 @@ class Planner:
         # optimum can lie between those centres when a small shift keeps the anchor
         # on its glass while moving several neighbours away from cell boundaries.
         # Refine only the winning field so the extra work stays bounded.
-        if state.fast_level == 0 and str(getattr(state, "card_id", "")).upper() not in {"D", "L4"}:
+        if state.fast_level == 0:
             _seed_total, seed_alt, seed_az, _seed_chosen = best
             for north_step in (-0.25, 0.0, 0.25):
                 for east_step in (-0.25, 0.0, 0.25):
@@ -602,7 +605,7 @@ class Planner:
                         if existing is None or score > existing[0]:
                             chosen[fib] = (score, j, margin)
                     total = sum(score for score, _, _ in chosen.values())
-                    if total > best[0]:
+                    if total > best[0] * (1.0 + REFINEMENT_MIN_RELATIVE_GAIN):
                         best = (total, c_alt, c_az, chosen)
         _, c_alt, c_az, chosen = best
         return self._finish_plan(now, lst, c_alt, c_az, chosen, seconds_left, moon, altaz, hours, night_index)

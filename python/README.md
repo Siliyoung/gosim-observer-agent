@@ -55,8 +55,8 @@ pack_agent.py              zip this folder into a project ZIP for submission
   required target not yet past the public factor threshold gets a large bonus; targets
   setting soon or with few nights left rank higher); for the best few candidates, try
   every fibre as the pointing centre and fill the rest with the best-value neighbours
-  that land on the glass; locally refine the winner on cards A/B/C while keeping the
-  bounded coarse search on the 100-fibre, 365-night card D; pick the exposure length with the best
+  that land on the glass; locally refine the winner only when the generic compute pace
+  allows and the estimated field-value gain is material; pick the exposure length with the best
   expected score per second and the program most assignments will match. Sleeps through
   the day, closes the shutter on an all-sky rain/storm bulletin, and reports a suspected
   instrument fault only after a sustained, unexplained quality drop confirmed over

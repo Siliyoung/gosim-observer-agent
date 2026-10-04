@@ -65,7 +65,6 @@ class SurveyState:
         instrument = init_payload["instrument"]
         limits = init_payload.get("limits", {})
         task_card = init_payload.get("task_card", {})
-        self.card_id = str(task_card.get("card_id", ""))
 
         self.lat = float(site["latitude_deg"])
         self.lon = float(site["longitude_deg"])
