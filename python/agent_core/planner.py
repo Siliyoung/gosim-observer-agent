@@ -63,7 +63,7 @@ REPORT_SPACING_HOURS = 6.0
 MAX_REPORTS = 2
 # This is a planning regulariser rather than simulator overhead: without it, tiny
 # score-rate differences lead to too many short exposures and poor survey coverage.
-FIELD_CHANGE_COST_SECONDS = 360.0
+FIELD_CHANGE_COST_SECONDS = 300.0
 # Do not perturb the long-horizon schedule for a numerically tiny one-step gain.
 # A refinement must clear this relative-value margin over the coarse field.
 REFINEMENT_MIN_RELATIVE_GAIN = 0.005
