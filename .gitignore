@@ -1,0 +1,13 @@
+.env
+**/__pycache__/
+*.pyc
+*.zip
+runner/.strategy_eval/
+runner/run_output/
+downloads/
+.autoresearch/
+autoresearch-results.tsv
+
+# Hidden local-card truth is runner-only and must never enter Agent experiments.
+local-cards/*/truth/
+

@@ -1,0 +1,19 @@
+{
+  "name": "ts-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GOSIM Agent Observer Challenge - TypeScript (Node.js) example agent for participant-agent-protocol-v4",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "tsc -p tsconfig.json && node dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "typescript": "^5.6.0"
+  }
+}

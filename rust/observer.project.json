@@ -1,0 +1,9 @@
+{
+  "schema_version": "observer-project-v1",
+  "protocol": "jsonl-v2",
+  "image": "rust:1-bookworm",
+  "working_directory": ".",
+  "build": [["cargo", "build", "--release", "--locked"]],
+  "run": ["./target/release/rust-agent"],
+  "environment": {}
+}
