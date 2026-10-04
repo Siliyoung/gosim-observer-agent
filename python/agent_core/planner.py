@@ -331,10 +331,7 @@ class Planner:
             if notice.get("event_kind") in FORECAST_AVOID_KINDS
             and str(notice.get("direction", "")).upper() in DIRECTION_AZ
         }
-        scales: list[float] = [1.15] if any(
-            notice.get("event_kind") in {"overcast", "haze", "cold_snap"}
-            for notice in forecast_tonight
-        ) else []
+        scales: list[float] = []
         for answer in (answer_forecast, answer_bulletin):
             if not answer:
                 continue
