@@ -455,8 +455,6 @@ class Planner:
                 nights_left = max(1, state.last_night[i] - night_index + 1)
                 setting = (1.0 + 0.5 * max(0.0, ha / h)) if h < 180 else 1.0
                 urgency = 1.0 + 2.0 / nights_left
-                if state.required[i] and state.factor[i] < state.scoring.required_threshold:
-                    urgency += 3.0 / nights_left
                 if (state.required[i] and state.factor[i] < state.scoring.required_threshold
                         and state.last_night[i] <= night_index):
                     # On the target's final observable night, restore the real
