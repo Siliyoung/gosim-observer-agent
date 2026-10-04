@@ -568,7 +568,7 @@ class Planner:
         # optimum can lie between those centres when a small shift keeps the anchor
         # on its glass while moving several neighbours away from cell boundaries.
         # Refine only the winning field so the extra work stays bounded.
-        if state.fast_level == 0:
+        if state.fast_level == 0 and str(getattr(state, "card_id", "")).upper() not in {"D", "L4"}:
             _seed_total, seed_alt, seed_az, _seed_chosen = best
             for north_step in (-0.25, 0.0, 0.25):
                 for east_step in (-0.25, 0.0, 0.25):
