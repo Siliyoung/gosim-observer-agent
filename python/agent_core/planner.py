@@ -55,6 +55,7 @@ CLOSED_KINDS = {"rain", "storm"}
 BLOCKING_KINDS = {"terrain_obstruction", "rocket_launch"}
 DIRECTION_AZ = {"N": 0.0, "NE": 45.0, "E": 90.0, "SE": 135.0, "S": 180.0,
                 "SW": 225.0, "W": 270.0, "NW": 315.0}
+FORECAST_AVOID_KINDS = {"rain", "storm", "overcast", "haze", "rocket_launch"}
 
 REPORT_DROP = 0.62
 REPORT_CONFIRMATIONS = 3
@@ -324,7 +325,12 @@ class Planner:
             left,
         )
 
-        avoid: set[str] = set()
+        avoid = {
+            str(notice.get("direction", "")).upper()
+            for notice in forecast_tonight
+            if notice.get("event_kind") in FORECAST_AVOID_KINDS
+            and str(notice.get("direction", "")).upper() in DIRECTION_AZ
+        }
         scales: list[float] = []
         for answer in (answer_forecast, answer_bulletin):
             if not answer:
