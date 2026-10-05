@@ -66,7 +66,7 @@ MAX_REPORTS = 2
 FIELD_CHANGE_COST_SECONDS = 300.0
 # Do not perturb the long-horizon schedule for a numerically tiny one-step gain.
 # A refinement must clear this relative-value margin over the coarse field.
-REFINEMENT_MIN_RELATIVE_GAIN = 0.01
+REFINEMENT_MIN_RELATIVE_GAIN = 0.005
 
 
 class RequestGoal(NamedTuple):
