@@ -219,7 +219,7 @@ class Planner:
             threshold = min(1.0, max(0.0, float(request.get(
                 "completion_factor_threshold", state.scoring.required_threshold))))
             hours_left = max(0.0, (deadline - now).total_seconds() / 3600.0)
-            urgency = 0.5 + 0.5 * max(0.0, 1.0 - hours_left / 24.0)
+            urgency = 0.4 + 0.6 * max(0.0, 1.0 - hours_left / 24.0)
             bonus = (reward / max(1, needed)) * urgency
 
             for target_id in candidates:
